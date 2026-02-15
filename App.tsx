@@ -1,9 +1,19 @@
 import React from 'react'
-import { View } from 'react-native';
 
-export const App = () => {
+import { PantallaLogo } from './src/screens/PantallaLogo';
+import { PantallaInicioSesion } from './src/screens/PantallaInicioSecion';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+
+const App = () => {
   return (
-    <View></View>
+
+<SafeAreaProvider>
+    <SafeAreaView style={{flex: 1}}>
+      {/* <PantallaLogo/> */}
+      <PantallaInicioSesion />
+    </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 
