@@ -12,8 +12,8 @@ const App = () => {
 <SafeAreaProvider>
     <SafeAreaView style={{flex: 1}}>
       {/* <PantallaLogo/> */}
-      <PantallaInicioSesion />
-      {/* <PantallaRegistro/> */}
+      {/* <PantallaInicioSesion /> */}
+      <PantallaRegistro/>
 
     </SafeAreaView>
     </SafeAreaProvider>

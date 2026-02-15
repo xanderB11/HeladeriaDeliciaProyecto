@@ -21,7 +21,7 @@ export const PantallaInicioSesion = () => {
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.wrapper}>
+            <SafeAreaView style={styles.fondo}>
                 <View style={styles.container}>
                     <Image
                         source={{ uri: 'https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png' }}
@@ -73,7 +73,7 @@ export const PantallaInicioSesion = () => {
 };
 
 const styles = StyleSheet.create({
-    wrapper: {
+    fondo: {
         flex: 1,
         backgroundColor: "#00BCD4",
         justifyContent: "center",
@@ -89,19 +89,19 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
     logo: {
-    width:300,
-    height: 250,
-    marginBottom: 0,
-  },
+        width: 300,
+        height: 250,
+        marginBottom: 0,
+    },
 
     titulo: {
         fontSize: 30,
         fontWeight: "bold",
         color: "white",
         marginBottom: 5,
-        textShadowColor: "rgba(0,0,0,0.3)",
+        textShadowColor: "#f6558b",
         textShadowOffset: { width: 2, height: 3 },
-        textShadowRadius: 5,
+        textShadowRadius: 10,
         padding: 10
     },
 
