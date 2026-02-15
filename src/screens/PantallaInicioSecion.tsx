@@ -1,165 +1,145 @@
-import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Alert
-} from 'react-native'
-import {
-  SafeAreaView,
-  SafeAreaProvider
-} from 'react-native-safe-area-context'
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert, Image } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 export const PantallaInicioSesion = () => {
+    const [correo, setCorreo] = useState("");
+    const [password, setPassword] = useState("");
 
-  const [correo, setCorreo] = useState('')
-  const [password, setPassword] = useState('')
+    const iniciarsecion = () => {
+        if (correo === "" || password === "") {
+            Alert.alert("Error", "Todos los campos son obligatorios");
+            return;
+        }
 
-  const handleLogin = () => {
+        Alert.alert("Bienvenido 🍦", `Hola ${correo}`);
+    };
 
-    if (correo === '' || password === '') {
-      Alert.alert('Error', 'Todos los campos son obligatorios')
-      return
-    }
+    const handleRegistro = () => {
+        Alert.alert("Registro", "Aquí irá la pantalla de registro");
+    };
 
-    Alert.alert('Bienvenido 🍦', `Hola ${correo}`)
-  }
+    return (
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.wrapper}>
+                <View style={styles.container}>
+                    <Image
+                        source={{ uri: 'https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png' }}
+                        style={styles.logo}
+                        resizeMode="contain"
+                    />
 
-  const handleRegistro = () => {
-    // En el futuro aquí irá navigation.navigate('PantallaRegistro')
-    Alert.alert('Registro', 'Aquí irá la pantalla de registro')
-  }
+                    <Text style={styles.titulo}>Iniciar Sesión</Text>
 
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.wrapper}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Correo electrónico"
+                        placeholderTextColor="#888"
+                        value={correo}
+                        onChangeText={setCorreo}
+                        keyboardType="email-address"
+                    />
 
-        <View style={styles.container}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Contraseña"
+                        placeholderTextColor="#888"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
 
-          <Text style={styles.titulo}>
-            Heladería Deliciosa
-          </Text>
+                    <TouchableOpacity
+                        style={[
+                            styles.boton,
+                            (correo === "" || password === "") && styles.botonDeshabilitado,
+                        ]}
+                        onPress={iniciarsecion}
+                        disabled={correo === "" || password === ""}
+                    >
+                        <Text style={styles.textoBoton}>Entrar</Text>
+                    </TouchableOpacity>
 
-          <Text style={styles.subtitulo}>
-            Iniciar Sesión
-          </Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Correo electrónico"
-            placeholderTextColor="#888"
-            value={correo}
-            onChangeText={setCorreo}
-            keyboardType="email-address"
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            placeholderTextColor="#888"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-
-          <TouchableOpacity
-            style={[
-              styles.boton,
-              (correo === '' || password === '') && styles.botonDeshabilitado
-            ]}
-            onPress={handleLogin}
-            disabled={correo === '' || password === ''}
-          >
-            <Text style={styles.textoBoton}>
-              Entrar
-            </Text>
-          </TouchableOpacity>
-
-          {/* TEXTO REGISTRO */}
-          <TouchableOpacity onPress={handleRegistro}>
-            <Text style={styles.textoRegistro}>
-              ¿No tienes cuenta? Regístrate
-            </Text>
-          </TouchableOpacity>
-
-        </View>
-
-      </SafeAreaView>
-    </SafeAreaProvider>
-  )
-}
+                    {/* TEXTO REGISTRO */}
+                    <TouchableOpacity onPress={handleRegistro}>
+                        <Text style={styles.textoRegistro}>
+                            ¿No tienes cuenta? Regístrate
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        </SafeAreaProvider>
+    );
+};
 
 const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        backgroundColor: "#00BCD4",
+        justifyContent: "center",
+        alignItems: "center",
+    },
 
-  wrapper: {
-    flex: 1,
-    backgroundColor:  '#00BCD4',
-    justifyContent: 'center',
-    alignItems: 'center',
+    container: {
+        width: "90%",
+        backgroundColor: "#F48FB1",
+        borderRadius: 35,
+        padding: 10,
+        alignItems: "center",
+        elevation: 10,
+    },
+    logo: {
+    width:300,
+    height: 250,
+    marginBottom: 0,
   },
 
-  container: {
-    width: '90%',
-    backgroundColor: '#F48FB1',
-    borderRadius: 35,
-    padding: 30,
-    alignItems: 'center',
-    elevation: 10,
-  },
+    titulo: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "white",
+        marginBottom: 5,
+        textShadowColor: "rgba(0,0,0,0.3)",
+        textShadowOffset: { width: 2, height: 3 },
+        textShadowRadius: 5,
+        padding: 10
+    },
 
-  titulo: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 5,
-    textShadowColor: 'rgba(0,0,0,0.3)',
-    textShadowOffset: { width: 2, height: 3 },
-    textShadowRadius: 5,
-  },
+    input: {
+        width: "100%",
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 15,
+        marginBottom: 20,
+        fontSize: 16,
+        elevation: 5,
+    },
 
-  subtitulo: {
-    fontSize: 25,
-    color: 'white',
-    marginBottom: 25,
-  },
+    boton: {
+        backgroundColor: "#00BCD4",
+        paddingVertical: 15,
+        paddingHorizontal: 80,
+        borderRadius: 25,
+        marginTop: 10,
+        elevation: 8,
+    },
 
-  input: {
-    width: '100%',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 15,
-    marginBottom: 20,
-    fontSize: 16,
-    elevation: 5,
-  },
+    botonDeshabilitado: {
+        backgroundColor: "#00BCD4",
+    },
 
-  boton: {
-    backgroundColor: '#00BCD4',
-    paddingVertical: 15,
-    paddingHorizontal: 80,
-    borderRadius: 25,
-    marginTop: 10,
-    elevation: 8,
-  },
+    textoBoton: {
+        color: "white",
+        fontSize: 18,
+        fontWeight: "bold",
+    },
 
-  botonDeshabilitado: {
-    backgroundColor: '#00BCD4',
-  },
-
-  textoBoton: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-
-  textoRegistro: {
-    marginTop: 20,
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    textDecorationLine: 'underline',
-  }
-
-})
+    textoRegistro: {
+        marginTop: 20,
+        color: "white",
+        fontSize: 16,
+        fontWeight: "600",
+        textDecorationLine: "underline",
+        padding: 10
+    },
+});
