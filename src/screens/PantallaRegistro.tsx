@@ -1,158 +1,110 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, Image } from "react-native";
+import { Text, View, ScrollView, Image, Alert, StatusBar } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { styleGlobal } from '../theme/AppTheme';
+import { RootStackParamList } from "../navigator/StackNavigator";
+import { InputComponents } from "../componentes/inputComponents";
+import { ButtonComponent } from "../componentes/ButtonComponent";
 
-export const PantallaRegistro = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "Registro">;
 
-    const [nombre, setNombre] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [celular, setCelular] = useState("");
-    const [edad, setEdad] = useState("");
-    const [cedula, setCedula] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+interface FormRegister {
+    nombre: string;
+    correo: string;
+    celular: string;
+    edad: string;
+    password: string;
+    confirmPassword: string;
+}
 
+export const PantallaRegistro = ({ navigation }: Props) => {
 
+    const [formRegister, setFormRegister] = useState<FormRegister>({
+        nombre: "",
+        correo: "",
+        celular: "",
+        edad: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const handleChangeValue = (name: string, value: string): void => {
+        setFormRegister({ ...formRegister, [name]: value });
+    };
+
+    const registrarUsuario = (): void => {
+        console.log(formRegister);
+    };
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.fondo}>
-                <ScrollView contentContainerStyle={styles.alinearCuadro}>
+            <SafeAreaView style={styleGlobal.fondoRegistro}>
+                <StatusBar  />
+                <ScrollView contentContainerStyle={styleGlobal.alinearCuadroRegistro}>
+                    <View style={styleGlobal.container}>
 
-                    <View style={styles.container}>
                         <Image
-                            source={{ uri: 'https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png' }}
-                            style={styles.logo}
+                            source={{ uri: "https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png" }}
+                            style={styleGlobal.logoRegistro}
                             resizeMode="contain"
                         />
 
-                        <Text style={styles.titulo}>Crear Cuenta</Text>
+                        <Text style={styleGlobal.tituloRegistro}>Crear Cuenta</Text>
 
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Nombre Completo"
-                            placeholderTextColor="#888"
-                            value={nombre}
-                            onChangeText={setNombre}
+                            name="nombre"
+                            handleChangeValue={handleChangeValue}
                         />
 
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Correo Electrónico"
-                            placeholderTextColor="#888"
-                            value={correo}
-                            onChangeText={setCorreo}
                             keyboardType="email-address"
+                            name="correo"
+                            handleChangeValue={handleChangeValue}
                         />
 
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Celular"
-                            placeholderTextColor="#888"
-                            value={celular}
-                            onChangeText={setCelular}
                             keyboardType="numeric"
+                            name="celular"
+                            handleChangeValue={handleChangeValue}
                         />
 
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Edad"
-                            placeholderTextColor="#888"
-                            value={edad}
-                            onChangeText={setEdad}
                             keyboardType="numeric"
+                            name="edad"
+                            handleChangeValue={handleChangeValue}
                         />
 
-
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Contraseña"
-                            placeholderTextColor="#888"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
+                            name="password"
+                            handleChangeValue={handleChangeValue}
+                            isPassword
                         />
 
-                        <TextInput
-                            style={styles.input}
+                        <InputComponents
                             placeholder="Confirmar Contraseña"
-                            placeholderTextColor="#888"
-                            value={confirmPassword}
-                            onChangeText={setConfirmPassword}
-                            secureTextEntry
+                            name="confirmPassword"
+                            handleChangeValue={handleChangeValue}
+                            isPassword
                         />
 
-                        <TouchableOpacity style={styles.boton} >{/* agregar despues onclick en el boton */}
-                            <Text style={styles.textoBoton}>Finalizar Registro</Text>
-                        </TouchableOpacity>
+                        <ButtonComponent
+                            text="Finalizar Registro"
+                            onPress={registrarUsuario}
+                        />
+                        <ButtonComponent
+                            text="Volver"
+                            onPress={() => navigation.navigate("InicioSesion")}
+                        />
 
                     </View>
-
                 </ScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
     );
 };
-
-const styles = StyleSheet.create({
-
-    fondo: {
-        flex: 1,
-        backgroundColor: "#00BCD4",
-    },
-
-    alinearCuadro: {
-        flexGrow: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingVertical: 40,
-    },
-
-    container: {
-        width: "90%",
-        backgroundColor: "#F48FB1",
-        borderRadius: 35,
-        padding: 15,
-        alignItems: "center",
-        elevation: 10,
-    },
-    logo: {
-        width: 400,
-        height: 250,
-        marginBottom: 0,
-       
-    },
-
-    titulo: {
-        fontSize: 26,
-        fontWeight: "bold",
-        color: "white",
-        marginBottom: 25,
-    },
-
-    input: {
-        width: "100%",
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 15,
-        marginBottom: 15,
-        fontSize: 16,
-        elevation: 10,
-    },
-
-    boton: {
-        backgroundColor: "#00BCD4",
-        paddingVertical: 15,
-        paddingHorizontal: 40,
-        borderRadius: 25,
-        marginTop: 20,
-        elevation: 8,
-    },
-
-    textoBoton: {
-        color: "white",
-        fontSize: 18,
-        fontWeight: "bold",
-    },
-
-});
