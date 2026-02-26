@@ -17,7 +17,6 @@ export const ButtonComponent = ({
     <TouchableOpacity
       style={[
         styleGlobal.boton,
-        disabled && styleGlobal.botonDeshabilitado,
       ]}
       onPress={onPress}
       disabled={disabled}

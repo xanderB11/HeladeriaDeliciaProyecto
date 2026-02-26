@@ -1,110 +1,101 @@
 import React, { useState } from "react";
 import { Text, View, ScrollView, Image, Alert, StatusBar } from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { styleGlobal } from '../theme/AppTheme';
-import { RootStackParamList } from "../navigator/StackNavigator";
+import { RootStackParamList, User } from "../navigator/StackNavigator";
 import { InputComponents } from "../componentes/inputComponents";
 import { ButtonComponent } from "../componentes/ButtonComponent";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Registro">;
-
-interface FormRegister {
-    nombre: string;
-    correo: string;
-    celular: string;
-    edad: string;
-    password: string;
-    confirmPassword: string;
+interface Props extends NativeStackScreenProps<RootStackParamList, "Registro"> {
+  users: User[];
+  handleAddUser: (user: User) => void;
 }
 
-export const PantallaRegistro = ({ navigation }: Props) => {
+interface FormRegister {
+  nombre: string;
+  correo: string;
+  celular: string;
+  edad: string;
+  password: string;
+  confirmPassword: string;
+}
 
-    const [formRegister, setFormRegister] = useState<FormRegister>({
-        nombre: "",
-        correo: "",
-        celular: "",
-        edad: "",
-        password: "",
-        confirmPassword: "",
-    });
+export const PantallaRegistro = ({ navigation, users, handleAddUser }: Props) => {
 
-    const handleChangeValue = (name: string, value: string): void => {
-        setFormRegister({ ...formRegister, [name]: value });
+  const [formRegister, setFormRegister] = useState<FormRegister>({
+    nombre: "",
+    correo: "",
+    celular: "",
+    edad: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChangeValue = (name: string, value: string): void => {
+    setFormRegister({ ...formRegister, [name]: value });
+  };
+
+  const registrarUsuario = (): void => {
+
+    if (Object.values(formRegister).includes("")) {
+      Alert.alert("Error", "Complete todos los campos");
+      return;
+    }
+
+    if (formRegister.password !== formRegister.confirmPassword) {
+      Alert.alert("Error", "Las contraseñas no coinciden");
+      return;
+    }
+
+    const existe = users.find(user => user.correo === formRegister.correo);
+
+    if (existe) {
+      Alert.alert("Error", "El usuario ya existe");
+      return;
+    }
+
+    const nuevoUsuario: User = {
+      id: users.length + 1,
+      nombre: formRegister.nombre,
+      correo: formRegister.correo,
+      celular: formRegister.celular,
+      edad: formRegister.edad,
+      password: formRegister.password,
     };
 
-    const registrarUsuario = (): void => {
-        console.log(formRegister);
-    };
+    handleAddUser(nuevoUsuario);
 
-    return (
-        <SafeAreaProvider>
-            <SafeAreaView style={styleGlobal.fondoRegistro}>
-                <StatusBar  />
-                <ScrollView contentContainerStyle={styleGlobal.alinearCuadroRegistro}>
-                    <View style={styleGlobal.container}>
+    Alert.alert("Éxito", "Usuario registrado correctamente");
+    navigation.navigate("InicioSesion");
+  };
 
-                        <Image
-                            source={{ uri: "https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png" }}
-                            style={styleGlobal.logoRegistro}
-                            resizeMode="contain"
-                        />
+  return (
+    <SafeAreaView style={styleGlobal.fondoRegistro}>
+      <StatusBar />
+      <ScrollView contentContainerStyle={styleGlobal.alinearCuadroRegistro}>
+        <View style={styleGlobal.container}>
 
-                        <Text style={styleGlobal.tituloRegistro}>Crear Cuenta</Text>
+          <Image
+            source={{ uri: "https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png" }}
+            style={styleGlobal.logoRegistro}
+            resizeMode="contain"
+          />
 
-                        <InputComponents
-                            placeholder="Nombre Completo"
-                            name="nombre"
-                            handleChangeValue={handleChangeValue}
-                        />
+          <Text style={styleGlobal.tituloRegistro}>Crear Cuenta</Text>
 
-                        <InputComponents
-                            placeholder="Correo Electrónico"
-                            keyboardType="email-address"
-                            name="correo"
-                            handleChangeValue={handleChangeValue}
-                        />
+          <InputComponents placeholder="Nombre Completo" name="nombre" handleChangeValue={handleChangeValue} />
+          <InputComponents placeholder="Correo Electrónico" keyboardType="email-address" name="correo" handleChangeValue={handleChangeValue} />
+          <InputComponents placeholder="Celular" keyboardType="numeric" name="celular" handleChangeValue={handleChangeValue} />
+          <InputComponents placeholder="Edad" keyboardType="numeric" name="edad" handleChangeValue={handleChangeValue} />
+          <InputComponents placeholder="Contraseña" name="password" handleChangeValue={handleChangeValue} isPassword />
+          <InputComponents placeholder="Confirmar Contraseña" name="confirmPassword" handleChangeValue={handleChangeValue} isPassword />
 
-                        <InputComponents
-                            placeholder="Celular"
-                            keyboardType="numeric"
-                            name="celular"
-                            handleChangeValue={handleChangeValue}
-                        />
+          <ButtonComponent text="Finalizar Registro" onPress={registrarUsuario} />
+          <ButtonComponent text="Volver" onPress={() => navigation.navigate("InicioSesion")} />
 
-                        <InputComponents
-                            placeholder="Edad"
-                            keyboardType="numeric"
-                            name="edad"
-                            handleChangeValue={handleChangeValue}
-                        />
-
-                        <InputComponents
-                            placeholder="Contraseña"
-                            name="password"
-                            handleChangeValue={handleChangeValue}
-                            isPassword
-                        />
-
-                        <InputComponents
-                            placeholder="Confirmar Contraseña"
-                            name="confirmPassword"
-                            handleChangeValue={handleChangeValue}
-                            isPassword
-                        />
-
-                        <ButtonComponent
-                            text="Finalizar Registro"
-                            onPress={registrarUsuario}
-                        />
-                        <ButtonComponent
-                            text="Volver"
-                            onPress={() => navigation.navigate("InicioSesion")}
-                        />
-
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        </SafeAreaProvider>
-    );
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
