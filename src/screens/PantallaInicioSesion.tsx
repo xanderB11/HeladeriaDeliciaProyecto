@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Alert, Image, StatusBar } from "react-native";
+import { Text, View, Alert, Image, StatusBar, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { styleGlobal } from "../theme/AppTheme";
@@ -46,12 +46,11 @@ export const PantallaInicioSesion = ({ navigation, users }: Props) => {
       Alert.alert("Error", "Correo o contraseña incorrectos");
       return;
     }
-    navigation.dispatch(CommonActions.navigate({name: 'Home'}));
+    navigation.dispatch(CommonActions.navigate({ name: 'Home' }));
   };
 
   return (
-    <SafeAreaView style={styleGlobal.fondo}>
-      <StatusBar />
+    <View style={styleGlobal.fondoPantalla}>
       <View style={styleGlobal.container}>
 
         <Image
@@ -91,15 +90,14 @@ export const PantallaInicioSesion = ({ navigation, users }: Props) => {
           text="Entrar"
           onPress={iniciarSesion}
         />
-
-        <Text
-          style={styleGlobal.textoRegistro}
-          onPress={() => navigation.navigate("Registro")}
+        <TouchableOpacity
+        onPress={() => navigation.navigate("Registro")}
         >
+          <Text style={styleGlobal.textoRegistro}>
           ¿No tienes cuenta? Regístrate
         </Text>
-
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };

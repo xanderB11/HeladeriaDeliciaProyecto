@@ -6,13 +6,12 @@ import { ButtonComponent } from "../componentes/ButtonComponent";
 
 export const PantallaLogo = ({ navigation }: any) => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styleGlobal.fondo}>
+      <View style={styleGlobal.fondoPantalla}>
         <View style={styleGlobal.container}>
           <Image
             source={{ uri: "https://i.postimg.cc/ncVzS6kN/logotipo_detallado.png" }}
             style={styleGlobal.logo}
-            resizeMode="contain"
+            
           />
 
           <ButtonComponent
@@ -20,7 +19,6 @@ export const PantallaLogo = ({ navigation }: any) => {
             onPress={() => navigation.navigate("InicioSesion")}
           />
         </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </View>
   );
 };

@@ -31,7 +31,7 @@ export const StackNavigator = () => {
       id: 1,
       nombre: "Alexander Baez",
       correo: "alexbaez@gmail.com",
-      celular: "0999999999",
+      celular: "0984490507",
       edad: "25",
       password: "123456"
     },
@@ -39,7 +39,7 @@ export const StackNavigator = () => {
       id: 2,
       nombre: "Rene Alarcon",
       correo: "renealarcon@gmail.com",
-      celular: "0988888888",
+      celular: "0958692546",
       edad: "30",
       password: "678910"
     }

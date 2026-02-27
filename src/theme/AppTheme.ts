@@ -7,7 +7,7 @@ export const styleGlobal = StyleSheet.create({
     // 🔵 LOGIN SCREEN
 
 
-    fondo: {
+    fondoPantalla: {
         flex: 1,
         backgroundColor: COLOR_AZUL,
         justifyContent: "center",

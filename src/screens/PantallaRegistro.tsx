@@ -71,8 +71,7 @@ export const PantallaRegistro = ({ navigation, users, handleAddUser }: Props) =>
   };
 
   return (
-    <SafeAreaView style={styleGlobal.fondoRegistro}>
-      <StatusBar />
+    <View style={styleGlobal.fondoRegistro}> 
       <ScrollView contentContainerStyle={styleGlobal.alinearCuadroRegistro}>
         <View style={styleGlobal.container}>
 
@@ -96,6 +95,6 @@ export const PantallaRegistro = ({ navigation, users, handleAddUser }: Props) =>
 
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
