@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLOR_AZUL, COLOR_ROSADO } from '../commons/constants';
+import { COLOR_AZUL, COLOR_ROSADO, COlOR_ROSADO_FUERTE } from '../commons/constants';
 
 export const styleGlobal = StyleSheet.create({
 
@@ -100,14 +100,15 @@ export const styleGlobal = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 20,
         backgroundColor: COLOR_AZUL,
-        elevation: 8
+        elevation: 8,
+        
     },
 
     textoHome: {
         fontSize: 40,
         fontWeight: "bold",
         color: 'white',
-        backgroundColor: COLOR_ROSADO,
+        backgroundColor: COlOR_ROSADO_FUERTE,
         paddingHorizontal: 20,
         paddingVertical: 5,
         borderRadius: 25,
@@ -120,7 +121,7 @@ export const styleGlobal = StyleSheet.create({
     },
 
     textIconCart: {
-        backgroundColor: COLOR_ROSADO,
+        backgroundColor: COlOR_ROSADO_FUERTE,
         color: 'white',
         fontWeight: 'bold',
         paddingHorizontal: 10,
@@ -130,9 +131,7 @@ export const styleGlobal = StyleSheet.create({
     },
 
     containerBody: {
-        backgroundColor: '#FFE4EC',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        backgroundColor: COlOR_ROSADO_FUERTE,
         paddingHorizontal: 20,
         paddingVertical: 30,
         flex: 1
@@ -173,7 +172,7 @@ export const styleGlobal = StyleSheet.create({
     // MODAL PRODUCTOS
     modalContainer: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(71, 229, 246, 0.4)',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -226,6 +225,13 @@ export const styleGlobal = StyleSheet.create({
         marginBottom: 10,
         elevation: 5
     },
+    imagenModal:{
+    width: 120,
+                  height: 120,
+                  marginBottom: 10,
+                  borderRadius:10,
+                  padding: 10
+    },
 
 
     //  COMPONENTES GENERALES (REUTILIZABLES)
@@ -268,6 +274,102 @@ export const styleGlobal = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
     },
+
+    // MODAL CARRITO 
+
+    containerModalCart: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(71, 229, 246, 0.4)', 
+    },
+
+    bodyModalCart: {
+        backgroundColor: 'white',
+        borderRadius: 30,
+        padding: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 15,
+    },
+
+    headerModalCart: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor: COLOR_ROSADO,
+        paddingBottom: 10,
+        marginBottom: 15
+    },
+
+    tituloModalCart: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: COLOR_AZUL
+    },
+
+    headerTable: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 5,
+        marginBottom: 10,
+        backgroundColor: COLOR_AZUL,
+        borderRadius: 10,
+        padding: 5
+    },
+
+    textHeaderTable: {
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize: 14
+    },
+
+    rowProduct: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 12,
+        
+    },
+
+    textProductName: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#333',
+        width: '40%'
+    },
+
+    textProductDetails: {
+        fontSize: 14,
+        color: '#666',
+        textAlign: 'center'
+    },
+
+    containerTotal: {
+        marginTop: 20,
+        paddingTop: 15,
+        borderTopWidth: 2,
+        borderTopColor: COLOR_ROSADO,
+        alignItems: 'flex-end'
+    },
+
+    textTotal: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: COlOR_ROSADO_FUERTE
+    },
+
+    buttonBuy: {
+        backgroundColor: COLOR_AZUL,
+        marginTop: 20,
+        paddingVertical: 15,
+        borderRadius: 25,
+        alignItems: 'center',
+        elevation: 5
+    }
     
 
 });

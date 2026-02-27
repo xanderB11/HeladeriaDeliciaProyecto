@@ -26,40 +26,35 @@ export const ModalProductos = ({
       <View style={styleGlobal.modalContainer}>
         <View style={[styleGlobal.modalContent, { height: height * 0.6 }]}>
 
-          {/* IMAGEN DEL PRODUCTO */}
+          
           <Image
             source={{ uri: item.pathImage }}
-            style={{
-              width: 120,
-              height: 120,
-              marginBottom: 10,
-              borderRadius:10,
-              padding: 10
-            }}
+            style={styleGlobal.imagenModal}
           />
 
           <Text style={styleGlobal.titleCard}>{item.name}</Text>
           <Text>Stock disponible: {item.stock}</Text>
           <Text>Precio: ${item.price.toFixed(2)}</Text>
 
-          {/* CONTROL DE CANTIDAD */}
           <View style={styleGlobal.quantityContainer}>
 
             <TouchableOpacity
-              onPress={() => quantity > 1 && setQuantity(quantity - 1)}>
+              onPress={() =>setQuantity(quantity - 1)}
+              disabled={ quantity  == 1 }>
               <Text style={styleGlobal.quantityButton}>-</Text>
             </TouchableOpacity>
 
             <Text style={{ fontSize: 18 }}>{quantity}</Text>
 
             <TouchableOpacity
-              onPress={() => quantity < item.stock && setQuantity(quantity + 1)}>
+              onPress={() => setQuantity(quantity + 1)}
+              disabled={quantity == item.stock}>
               <Text style={styleGlobal.quantityButton}>+</Text>
             </TouchableOpacity>
 
           </View>
 
-          {/* BOTÓN AGREGAR */}
+          
           <TouchableOpacity
             style={styleGlobal.buttonAgregar}
             onPress={() => {

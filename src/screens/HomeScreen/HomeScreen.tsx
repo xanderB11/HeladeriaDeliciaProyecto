@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import Icon from '@expo/vector-icons/MaterialIcons';
 import { styleGlobal } from "../../theme/AppTheme";
-import { COLOR_ROSADO } from "../../commons/constants";
+import { COLOR_ROSADO, COlOR_ROSADO_FUERTE } from "../../commons/constants";
 import { CardProductos } from "./components/CardProductos";
+import { ModalCart } from "./components/ModalCart";
 
 export interface Product {
   id: number;
@@ -13,7 +14,7 @@ export interface Product {
   pathImage: string;
 }
 
-interface Cart {
+export interface Cart {
   id: number;
   name: string;
   price: number;
@@ -38,9 +39,11 @@ export const HomeScreen = () => {
 
   const [productsState, setProductsState] = useState<Product[]>(products);
   const [cart, setCart] = useState<Cart[]>([]);
+  
+  
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const changeStockProduct = (id: number, quantity: number): void => {
-
     const updatedProducts = productsState.map(product =>
       product.id === id
         ? { ...product, stock: product.stock - quantity }
@@ -52,7 +55,6 @@ export const HomeScreen = () => {
   };
 
   const addProduct = (id: number, quantity: number): void => {
-
     const product = productsState.find(p => p.id === id);
     if (!product) return;
 
@@ -70,17 +72,21 @@ export const HomeScreen = () => {
   return (
     <View style={{ flex: 1 }}>
 
-      {/* HEADER */}
-      <View style={styleGlobal.headerHome}>
+      
+      <View style={{...styleGlobal.headerHome, paddingTop: 50}}>
         <Text style={styleGlobal.textoHome}>Helados</Text>
 
-        <View style={styleGlobal.iconHome}>
+        
+        <TouchableOpacity 
+            style={styleGlobal.iconHome}
+            onPress={() => setIsVisible(true)}
+        >
           <Text style={styleGlobal.textIconCart}>{cart.length}</Text>
-          <Icon name="shopping-cart"  size={40} color={COLOR_ROSADO} />
-        </View>
+          <Icon name="shopping-cart" size={40} color={COlOR_ROSADO_FUERTE} />
+        </TouchableOpacity>
       </View>
 
-      {/* BODY */}
+     
       <View style={styleGlobal.containerBody}>
         <FlatList
           data={productsState}
@@ -93,6 +99,13 @@ export const HomeScreen = () => {
           showsVerticalScrollIndicator={false}
         />
       </View>
+
+      {/* COMPONENTE MODAL LLAMADO AL FINAL */}
+      <ModalCart 
+        isVisible={isVisible} 
+        cart={cart} 
+        hiddenModal={() => setIsVisible(false)} 
+      />
 
     </View>
   );
