@@ -19,6 +19,7 @@ export type RootStackParamList = {
   InicioSesion: undefined;
   Registro: undefined;
   Home: undefined;
+  
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,6 +45,8 @@ export const StackNavigator = () => {
       password: "678910"
     }
   ];
+  //nicol@gmail.com
+  //12345
 
   const [listUsers, setListUsers] = useState<User[]>(usersInitial);
 
@@ -61,6 +64,7 @@ export const StackNavigator = () => {
         {props => <PantallaRegistro {...props} users={listUsers} handleAddUser={handleAddUser} />}
       </Stack.Screen>
       <Stack.Screen name="Home" component={HomeScreen} />
+      
     </Stack.Navigator>
   );
 };

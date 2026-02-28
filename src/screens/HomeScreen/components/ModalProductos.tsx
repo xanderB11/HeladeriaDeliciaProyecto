@@ -9,6 +9,7 @@ interface Props {
   hiddenModal: () => void;
   changeStockProduct: (id: number, quantity: number) => void;
 }
+// 
 
 export const ModalProductos = ({
   isVisible,
@@ -43,6 +44,7 @@ export const ModalProductos = ({
               disabled={ quantity  == 1 }>
               <Text style={styleGlobal.quantityButton}>-</Text>
             </TouchableOpacity>
+            
 
             <Text style={{ fontSize: 18 }}>{quantity}</Text>
 

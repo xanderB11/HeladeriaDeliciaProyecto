@@ -33,6 +33,9 @@ export const CardProductos = ({ item, changeStockProduct }: Props) => {
           <Text style={styleGlobal.titleCard}>
             {item.name}
           </Text>
+          <Text style={{fontSize: 16, marginBottom: 10 }}>Cantidad del stock:
+            {item.stock}
+          </Text>
 
           <Text style={{ fontSize: 16, marginBottom: 10 }}>
             ${item.price.toFixed(2)}
